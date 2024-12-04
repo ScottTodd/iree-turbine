@@ -21,6 +21,9 @@ jobs:
       with:
         python-version: 3.11
 
+    - name: Install dependencies
+      run: pip install -r ./build_tools/requirements-packaging.txt
+
     - name: Build iree-turbine release candidate
       env:
         OUTPUT_DIR: "${{ github.workspace }}/bindist"

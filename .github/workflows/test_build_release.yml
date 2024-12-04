@@ -32,6 +32,9 @@ jobs:
         with:
           python-version: ${{ matrix.version }}
 
+      - name: Install dependencies
+        run: pip install -r ./build_tools/requirements-packaging.txt
+
       - name: Build Release Wheels
         run: |
           ./build_tools/compute_local_version.py -dev --write-json
