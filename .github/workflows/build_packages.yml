@@ -25,10 +25,7 @@ jobs:
       run: pip install -r ./build_tools/requirements-packaging.txt
 
     - name: Build iree-turbine release candidate
-      env:
-        OUTPUT_DIR: "${{ github.workspace }}/bindist"
       run: |
-        [ -e ./bindist/* ] && rm ./bindist/*
         ./build_tools/compute_local_version.py -rc --write-json
         ./build_tools/build_release.py --no-download
 
@@ -37,12 +34,12 @@ jobs:
       with:
         if-no-files-found: error
         name: snapshot
-        path: bindist
+        path: wheelhouse
 
     - name: Release python wheels
       uses: ncipollo/release-action@2c591bcc8ecdcd2db72b97d6147f871fcd833ba5 # v1.14.0
       with:
-        artifacts: bindist/*.whl
+        artifacts: wheelhouse/*.whl
         tag: "dev-wheels"
         name: "dev-wheels"
         body: "Automatic snapshot release of iree-turbine python wheels."
