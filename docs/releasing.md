@@ -42,7 +42,7 @@ be placed in the `wheelhouse/` directory.
 If you just want to build without downloading wheels, run
 
 ```bash
-python3.11 ./build_tools/build_release.py
+python3.11 ./build_tools/build_release.py --no-download
 # Note that the test scripts referenced below won't work with this.
 ```
 
