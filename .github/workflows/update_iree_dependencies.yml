@@ -28,7 +28,7 @@ jobs:
 
       - name: Run auto dependency update
         run: |
-          build_tools/autoupdate-dependencies.sh \
+          build_tools/autoupdate_dependencies.sh \
             ${{ secrets.GITHUB_TOKEN }} \
             build_tools/update_iree_version_pins.py \
             integrates/iree
