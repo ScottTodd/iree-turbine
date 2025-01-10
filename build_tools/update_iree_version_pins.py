@@ -41,10 +41,9 @@ def get_latest_package_version(package_name, extra_pip_args=[]):
         "--disable-pip-version-check",
     ]
     subprocess_args.extend(extra_pip_args)
-    subprocess_cmdline = subprocess.list2cmdline(subprocess_args)
 
-    print(f"Running command:\n  {subprocess_cmdline}\n")
-    result = subprocess.run(subprocess_cmdline, stdout=subprocess.PIPE)
+    print(f"Running command:\n  {subprocess.list2cmdline(subprocess_args)}\n")
+    result = subprocess.run(subprocess_args, stdout=subprocess.PIPE)
     output = result.stdout.decode("utf-8")
     print(f"Command output:\n{textwrap.indent(output, '  ')}")
 
