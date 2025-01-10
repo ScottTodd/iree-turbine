@@ -29,7 +29,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pr-branch: "'integrates/iree'"
-          update-command: "'> test.txt'"
-          # update-command: "'./build_tools/update_iree_version_pins.py'"
+          # update-command: "'> test.txt'"
+          update-command: "'./build_tools/update_iree_version_pins.py'"
           # update-path: "'${{ github.workspace }}'"
           # on-changes-command: "'echo hi'"
