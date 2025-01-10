@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # fail as soon as any command errors
-set -eux
+set -exo pipefail
 
 token=$1
 update_command=$2
