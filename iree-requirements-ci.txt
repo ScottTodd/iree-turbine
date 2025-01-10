@@ -11,4 +11,4 @@
 # --no-index
 
 iree-base-compiler==3.1.0rc20250103
-iree-base-runtime==3.1.0rc20250103
+iree-base-runtime==3.1.0
