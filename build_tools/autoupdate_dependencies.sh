@@ -64,9 +64,11 @@ fi
 echo "Running update command $update_command"
 eval $update_command
 
+set +e
 git diff --exit-code >/dev/null 2>&1
 if [ $? = 1 ]
 then
+    set -e
     echo "Updates detected"
 
     # configure git authorship
@@ -108,6 +110,7 @@ then
         exit 0
     fi
 else
+    set -e
     echo "No dependencies updates were detected"
     exit 0
 fi
