@@ -4,3 +4,9 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+  # Separate group for pytorch deps.
+  # https://github.com/dependabot/dependabot-core/issues/4364
+  - package-ecosystem: pip
+    directory: /build_tools
+    schedule:
+      interval: "daily"
