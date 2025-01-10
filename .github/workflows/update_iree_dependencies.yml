@@ -29,5 +29,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pr-branch: integrates/iree
-          update-command: "./build_tools/update_iree_version_pins.py"
-          on-changes-command: "echo 'Version update script completed'"
+          update-command: "'./build_tools/update_iree_version_pins.py'"
+          update-path: "'${{ github.workspace }}'"
+          on-changes-command: "'echo hi'"
