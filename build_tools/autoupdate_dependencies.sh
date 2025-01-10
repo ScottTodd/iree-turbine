@@ -11,7 +11,7 @@ on_changes_command=$5
 repo=$GITHUB_REPOSITORY #owner and repository: ie: user/repo
 username=$GITHUB_ACTOR
 
-branch_name="automated-dependencies-update"
+branch_name="integrates/iree"
 email="noreply@github.com"
 
 if [ -z "$token" ]; then

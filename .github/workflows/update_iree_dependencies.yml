@@ -30,8 +30,7 @@ jobs:
         run: |
           build_tools/autoupdate_dependencies.sh \
             ${{ secrets.GITHUB_TOKEN }} \
-            build_tools/update_iree_version_pins.py \
-            integrates/iree
+            build_tools/update_iree_version_pins.py
 
       # - name: Run auto dependency update
       #   uses: romoh/dependencies-autoupdate@7c3c46ae7d2e10fee175b73f21fee86cc0689a01 # untagged
