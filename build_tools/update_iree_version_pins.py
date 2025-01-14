@@ -100,10 +100,7 @@ def main():
         print(f"New text:\n{textwrap.indent(text, '  ')}\n")
 
         # Write a commit message.
-        body_text = f"""Automated update of IREE deps to {iree_base_compiler_version}.
-
-Diff: https://github.com/iree-org/iree/compare/iree-{old_version}...iree-{iree_base_compiler_version}
-        """
+        body_text = f"Diff: https://github.com/iree-org/iree/compare/iree-{old_version}...iree-{iree_base_compiler_version}"
         with open(UPDATE_GIT_COMMIT_MESSAGE_PATH, "w") as commit_f:
             commit_f.write(body_text)
     with open(REQUIREMENTS_IREE_PINNED_PATH, "w") as f:
