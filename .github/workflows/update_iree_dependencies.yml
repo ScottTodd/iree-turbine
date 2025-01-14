@@ -18,26 +18,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        with:
-          persist-credentials: false
 
       - name: "Setting up Python"
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
         with:
           python-version: 3.11
 
-      - name: Run auto dependency update
+      - name: Update IREE dependency
         run: |
-          build_tools/autoupdate_dependencies.sh \
+          build_tools/update_iree_version_via_pull_request.sh \
             ${{ secrets.GITHUB_TOKEN }} \
             build_tools/update_iree_version_pins.py
-
-      # - name: Run auto dependency update
-      #   uses: romoh/dependencies-autoupdate@7c3c46ae7d2e10fee175b73f21fee86cc0689a01 # untagged
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     pr-branch: "'integrates/iree'"
-      #     # update-command: "'> test.txt'"
-      #     update-command: "'python build_tools/update_iree_version_pins.py'"
-      #     # update-path: "'${{ github.workspace }}'"
-      #     # on-changes-command: "'echo hi'"
