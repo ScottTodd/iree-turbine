@@ -14,6 +14,7 @@ set -exo pipefail
 GITHUB_TOKEN=$1
 UPDATE_COMMAND=$2
 
+SCRIPT_DIR=$(dirname "$0")
 PR_BASE_BRANCH_NAME="main"
 BRANCH_NAME="integrates/iree"
 GIT_EMAIL="noreply@github.com"
@@ -69,10 +70,12 @@ then
 
     echo "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls"
 
+    PR_BODY=`cat ${SCRIPT_DIR}/update_iree_version_text.txt`
+
     # Update the existing PR or create a new one if none already exists.
     # TODO: add generated PR description
     RESPONSE=$(curl -X POST -H "Content-Type: application/json" -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${GITHUB_TOKEN}" \
-         --data '{"title":"Automatically update IREE version pins.","head": "'"${BRANCH_NAME}"'","base":"'"${PR_BASE_BRANCH_NAME}"'", "body":""}' \
+         --data '{"title":"Automatically update IREE version pins.","head": "'"${BRANCH_NAME}"'","base":"'"${PR_BASE_BRANCH_NAME}"'", "body":"'"${PR_BODY}"'"}' \
          "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls")
     echo ${RESPONSE}
 

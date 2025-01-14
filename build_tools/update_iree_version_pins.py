@@ -17,8 +17,10 @@ import subprocess
 import sys
 import textwrap
 
-REPO_ROOT = Path(__file__).parent.parent
+THIS_DIR = Path(__file__).parent
+REPO_ROOT = THIS_DIR.parent
 REQUIREMENTS_IREE_PINNED_PATH = REPO_ROOT / "requirements-iree-pinned.txt"
+UPDATE_GIT_COMMIT_MESSAGE_PATH = THIS_DIR / "update_iree_version_text.txt"
 
 
 def get_latest_package_version(package_name, extra_pip_args=[]):
@@ -82,6 +84,9 @@ def main():
     with open(REQUIREMENTS_IREE_PINNED_PATH, "r") as f:
         text = f.read()
         print(f"Original text:\n{textwrap.indent(text, '  ')}\n")
+
+        old_version = re.findall("iree-base-compiler==(.*)", text)[0]
+
         text = re.sub(
             "iree-base-compiler==.*",
             f"iree-base-compiler=={iree_base_compiler_version}",
@@ -93,6 +98,14 @@ def main():
             text,
         )
         print(f"New text:\n{textwrap.indent(text, '  ')}\n")
+
+        # Write a commit message.
+        body_text = f"""Automated update of IREE deps to {iree_base_compiler_version}.
+
+Diff: https://github.com/iree-org/iree/compare/iree-{old_version}...iree-{iree_base_compiler_version}
+        """
+        with open(UPDATE_GIT_COMMIT_MESSAGE_PATH, "w") as commit_f:
+            commit_f.write(body_text)
     with open(REQUIREMENTS_IREE_PINNED_PATH, "w") as f:
         f.write(text)
 
